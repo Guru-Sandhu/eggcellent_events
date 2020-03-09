@@ -1,1 +1,47 @@
-<h1 style="color: blue;">Survey</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eggcellent Events</title>
+</head>
+<body>
+  <h1>Survey</h1>
+  <form method="POST">
+    <div>
+      <label for="fullName">What's your Name ?</label>
+      <br>
+      <input type="text" name="fullName" id="fullName">
+    </div>
+    <div>
+      <label for="favoriteColor">Whats your favorite Color ?</label>
+      <br>
+      <input type="color" name="favoriteColor" id="favoriteColor">
+    </div>
+    <div>
+      <label for="favoriteDay">Whats your favorite Day</label>
+      <br>
+      <% const days = [
+        "sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ] %>
+      <% for (let option of days) { %>
+        <label for="<%= option %>"><%= option %></label>
+        <input 
+          type="radio" 
+          name="favouriteDay" 
+          id="<%= option %>"
+          value="<%= option %>"
+        >
+        <br>
+      <% } %>
+    </div>
+    <input type="submit" value="send">
+  </form>
+</body>
+</html>

@@ -7,15 +7,19 @@ app.set('view engine','ejs');
 app.set('views','views')
 
 app.use(logger('dev'))
+app.use(express.urlencoded({extended:true}))
 
 app.get('/', (req,res) => {
-  // res.send('<h1>Hello World</h1>')
   res.render('hello_world.ejs');
 })
 
 app.get('/survey',(req,res) => {
-  // res.send('Hello')
   res.render('survey.ejs')
+})
+
+app.post('/survey',(req,res) => {
+  console.log(req.body)
+  res.send('Thank you')
 })
 
 app.get('/memes',(req,res) => {
