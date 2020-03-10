@@ -17,6 +17,7 @@
     "pg": "^7.18.2"
   },
   "devDependencies": {
+    "faker": "^4.1.0",
     "morgan": "^1.9.1",
     "nodemon": "^2.0.2"
   }
