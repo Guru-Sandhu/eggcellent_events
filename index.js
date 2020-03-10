@@ -1,5 +1,6 @@
 const express = require('express')
 const logger = require('morgan')
+const knex = require('./db/client')
 
 const app = express();
 
@@ -32,6 +33,14 @@ app.get('/memes',(req,res) => {
     ]
   })
 })
+
+app.get('/events', (req,res) => {
+  knex.select('*').from('events')
+    .then(events => {
+      res.render('events/index',{events})
+    })
+})
+
 const PORT = 4000;
 const DOMAIN = 'localhost';
 app.listen(PORT,DOMAIN, () => {
