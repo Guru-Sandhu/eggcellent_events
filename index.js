@@ -1,6 +1,7 @@
 const express = require('express')
 const logger = require('morgan')
 const knex = require('./db/client')
+const eventsRouter = require('./routes/events')
 
 const app = express();
 
@@ -9,6 +10,8 @@ app.set('views','views')
 
 app.use(logger('dev'))
 app.use(express.urlencoded({extended:true}))
+
+app.use('/events', eventsRouter)
 
 app.get('/', (req,res) => {
   res.render('hello_world.ejs');
@@ -32,13 +35,6 @@ app.get('/memes',(req,res) => {
       "https://www.probytes.net/wp-content/uploads/2018/01/r_389776_tqMPa-1.jpg",
     ]
   })
-})
-
-app.get('/events', (req,res) => {
-  knex.select('*').from('events')
-    .then(events => {
-      res.render('events/index',{events})
-    })
 })
 
 const PORT = 4000;
