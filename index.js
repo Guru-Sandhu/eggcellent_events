@@ -2,6 +2,7 @@ const express = require('express')
 const logger = require('morgan')
 // const knex = require('./db/client')
 const eventsRouter = require('./routes/events')
+const noMonkey = require('./middleware/noMonkey')
 
 const app = express()
 
@@ -11,6 +12,7 @@ app.set('views', 'views')
 app.use(logger('dev'))
 app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }))
+app.use(noMonkey)
 
 app.use('/events', eventsRouter)
 
