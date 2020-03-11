@@ -1,4 +1,3 @@
-const knex = require('../db/client')
 const { event } = require('../models')
 
 module.exports = {
@@ -10,12 +9,9 @@ module.exports = {
   },
   create: (req, res) => {
     const { title, description } = req.body
-    knex.insert({ title, description }).into('events')
-      .then(() => {
-        res.redirect('/events')
-      })
-      .catch(() => {
-        res.render('events/new')
+    event.create({ title, description })
+      .then(event => {
+        res.send('events/inde')
       })
   },
   new: (req, res) => {
