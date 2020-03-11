@@ -1,8 +1,9 @@
 const knex = require('../db/client')
+const { event } = require('../models')
 
 module.exports = {
   index: (req, res) => {
-    knex.select('*').from('events')
+    event.all()
       .then(events => {
         res.render('events/index', { events })
       })
