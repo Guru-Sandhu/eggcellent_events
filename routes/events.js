@@ -1,27 +1,18 @@
 const express = require('express')
-const knex = require('../db/client')
 const router = express.Router()
+const { events } = require('../controllers')
 
-router.get('/', (req, res) => {
-  knex.select('*').from('events')
-    .then(events => {
-      res.render('events/index', { events })
-    })
-})
+// router.get('/', (req, res) => {
+//   knex.select('*').from('events')
+//     .then(events => {
+//       res.render('events/index', { events })
+//     })
+// })
 
-router.post('/', (req, res) => {
-  const { title, description } = req.body
-  knex.insert({ title, description }).into('events')
-    .then(() => {
-      res.redirect('/events')
-    })
-    .catch(() => {
-      res.render('events/new')
-    })
-})
+router.get('/', events.index)
 
-router.get('/new', (req, res) => {
-  res.render('events/new')
-})
+router.post('/', events.create)
+
+router.get('/new', events.new)
 
 module.exports = router

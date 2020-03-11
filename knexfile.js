@@ -5,9 +5,9 @@ module.exports = {
   development: {
     client: 'pg',
     connection: {
-      database:'eggcellent_events_wadd',
-      username:'guru',
-      password:'Sandhu@123'
+      database: 'eggcellent_events_wadd',
+      username: 'guru',
+      password: 'Sandhu@123'
     },
     migrations: {
       directory: './db/migrations',
@@ -16,5 +16,5 @@ module.exports = {
     seeds: {
       directory: './db/seeds'
     }
-  },
-};
+  }
+}

@@ -1,6 +1,6 @@
 const faker = require('faker')
 
-exports.seed = function(knex) {
+exports.seed = function (knex) {
   // Deletes ALL existing entries
   return knex('events').del()
     .then(function () {
@@ -11,5 +11,5 @@ exports.seed = function(knex) {
           description: `${faker.hacker.phrase()}`
         }
       }))
-    });
-};
+    })
+}
