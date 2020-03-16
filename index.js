@@ -1,5 +1,6 @@
 const express = require('express')
 const logger = require('morgan')
+const methodOverride = require('method-override')
 const eventsRouter = require('./routes/events')
 const noMonkey = require('./middleware/noMonkey')
 
@@ -11,6 +12,12 @@ app.set('views', 'views')
 app.use(logger('dev'))
 app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }))
+app.use(methodOverride((req, res) => {
+  if (req.body && req.body._method) {
+    const method = req.body._method
+    return method
+  }
+}))
 app.use(noMonkey)
 
 app.use('/events', eventsRouter)
