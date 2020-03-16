@@ -1,6 +1,5 @@
 const express = require('express')
 const logger = require('morgan')
-// const knex = require('./db/client')
 const eventsRouter = require('./routes/events')
 const noMonkey = require('./middleware/noMonkey')
 

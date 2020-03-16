@@ -11,10 +11,13 @@ module.exports = {
     const { title, description } = req.body
     event.create({ title, description })
       .then(event => {
-        res.send('events/inde')
+        res.send(event)
       })
   },
   new: (req, res) => {
     res.render('events/new')
+  },
+  show: (req, res) => {
+    res.send(req.params.id)
   }
 }
