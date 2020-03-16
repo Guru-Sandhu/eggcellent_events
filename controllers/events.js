@@ -32,7 +32,7 @@ module.exports = {
     const { id } = req.params
     event.delete(id)
       .then(numberOfDeletedRecord => {
-        res.send(numberOfDeletedRecord)
+        res.redirect('/events')
       })
       .catch(err => {
         console.log(err)
