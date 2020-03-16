@@ -17,4 +17,6 @@ router.post('/', events.create)
 
 router.get('/new', events.new)
 
+router.get('/:id', events.delete)
+
 module.exports = router

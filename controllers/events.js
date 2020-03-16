@@ -27,5 +27,15 @@ module.exports = {
           res.send(`NO event with id:${id}`)
         }
       })
+  },
+  delete: (req, res) => {
+    const { id } = req.params
+    event.delete(id)
+      .then(numberOfDeletedRecord => {
+        res.send(numberOfDeletedRecord)
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
 }
