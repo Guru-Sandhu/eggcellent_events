@@ -19,9 +19,13 @@ module.exports = {
   },
   show: (req, res) => {
     const { id } = req.params
-    event.one(id)
+    event.one(parseInt(id))
       .then(events => {
-        res.send(events)
+        if (events.length > 0) {
+          res.render('events/show', { event: events[0] })
+        } else {
+          res.send(`NO event with id:${id}`)
+        }
       })
   }
 }
