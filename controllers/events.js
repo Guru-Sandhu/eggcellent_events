@@ -18,6 +18,10 @@ module.exports = {
     res.render('events/new')
   },
   show: (req, res) => {
-    res.send(req.params.id)
+    const { id } = req.params
+    event.one(id)
+      .then(events => {
+        res.send(events)
+      })
   }
 }
