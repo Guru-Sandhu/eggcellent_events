@@ -9,6 +9,11 @@ module.exports = {
   },
   one: (id) => {
     return knex.select().from('events').where({ id: id })
+      .then(events => {
+        if (events.length > 0) {
+          return events[0]
+        }
+      })
   },
   create: ({ title, description }) => {
     return knex.insert({ title, description }).into('events')
