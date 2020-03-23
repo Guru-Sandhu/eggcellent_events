@@ -41,12 +41,8 @@ module.exports = {
   edit: (req, res) => {
     const { id } = req.params
     event.one(id)
-      .then(events => {
-        if (events.length > 0) {
-          res.render('events/edit', { event: events[0] })
-        } else {
-          res.send(`No event with id of ${id}`)
-        }
+      .then(event => {
+          res.render('events/edit', { event })
       })
   },
   update: (req,res) => {
