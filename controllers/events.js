@@ -37,5 +37,28 @@ module.exports = {
       .catch(err => {
         console.log(err)
       })
+  },
+  edit: (req, res) => {
+    const { id } = req.params
+    event.one(id)
+      .then(events => {
+        if (events.length > 0) {
+          res.render('events/edit', { event: events[0] })
+        } else {
+          res.send(`No event with id of ${id}`)
+        }
+      })
+  },
+  update: (req,res) => {
+    const { id } = req.params
+    const { title, description } = req.body
+    event.update({ id, title, description })
+      .then(events => {
+        if (events.length > 0) {
+          res.redirect(`/events/${events[0].id}`)
+        } else {
+          res.send(`Update to event with id ${id} failed`)
+        }
+      })
   }
 }

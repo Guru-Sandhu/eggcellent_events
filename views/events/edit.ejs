@@ -1,0 +1,8 @@
+<%- include('../partials/header') %> 
+<h1>Edit Event Page</h1>
+<form action="/events/<%= event.id %>" method="POST">
+  <input type="hidden" name="_method" value="PATCH">
+  <%- include('_eventsFormInputs') %> 
+</form>
+
+<%- include('../partials/footer') %> 

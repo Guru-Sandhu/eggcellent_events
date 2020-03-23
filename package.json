@@ -22,6 +22,6 @@
     "faker": "^4.1.0",
     "morgan": "^1.9.1",
     "nodemon": "^2.0.2",
-    "standard": "^14.3.1"
+    "standard": "^14.3.3"
   }
 }

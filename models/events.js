@@ -19,5 +19,8 @@ module.exports = {
   },
   delete: (id) => {
     return knex.delete().from('events').where({ id: id })
+  },
+  update: ({ id , title, description}) => {
+    return knex('events').update({ title, description}).where({ id }).returning('*')
   }
 }

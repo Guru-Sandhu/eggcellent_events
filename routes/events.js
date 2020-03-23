@@ -4,11 +4,15 @@ const { events } = require('../controllers')
 
 router.get('/', events.index)
 
+router.get('/new', events.new)
+
 router.get('/:id', events.show)
 
-router.post('/', events.create)
+router.get('/:id/edit', events.edit)
 
-router.get('/new', events.new)
+router.patch('/:id', events.update)
+
+router.post('/', events.create)
 
 router.delete('/:id', events.delete)
 
