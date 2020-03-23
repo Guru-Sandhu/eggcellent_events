@@ -53,11 +53,11 @@ module.exports = {
     const { id } = req.params
     const { title, description } = req.body
     event.update({ id, title, description })
-      .then(events => {
-        if (events.length > 0) {
-          res.redirect(`/events/${events[0].id}`)
+      .then(event => {
+        if (event) {
+          res.redirect(`/events/${event.id}`)
         } else {
-          res.send(`Update to event with id ${id} failed`)
+          res.redirect(`/events/${id}/edit`)
         }
       })
   }

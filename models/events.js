@@ -32,5 +32,10 @@ module.exports = {
   },
   update: ({ id , title, description}) => {
     return knex('events').update({ title, description}).where({ id }).returning('*')
+      .then( updatedEvents => {
+        if (updatedEvents.length > 0) {
+          return updatedEvents[0]
+        }
+      })
   }
 }
