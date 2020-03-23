@@ -27,8 +27,12 @@ module.exports = {
   delete: (req, res) => {
     const { id } = req.params
     event.delete(id)
-      .then(numberOfDeletedRecord => {
-        res.redirect('/events')
+      .then(hasDeleted => {
+        if (hasDeleted) {
+          res.redirect('/events')
+        } else {
+          res.redirect(`/events/${id}`)
+        }
       })
       .catch(err => {
         console.log(err)
