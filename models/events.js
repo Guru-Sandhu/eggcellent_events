@@ -18,8 +18,10 @@ module.exports = {
   create: ({ title, description }) => {
     return knex.insert({ title, description }).into('events')
       .returning('*')
-      .then(newEvent => {
-        return newEvent
+      .then(newEvents => {
+        if (newEvents.length > 0) {
+          return newEvent
+        }
       })
   },
   delete: (id) => {

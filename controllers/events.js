@@ -11,7 +11,7 @@ module.exports = {
     const { title, description } = req.body
     event.create({ title, description })
       .then(event => {
-        res.send(event)
+        res.redirect(`/events/${event.id}`)
       })
   },
   new: (req, res) => {
