@@ -31,13 +31,9 @@ module.exports = {
   },
   delete: (req, res) => {
     const { id } = req.params
-    event.delete(id)
+    new event({ id }).destroy()
       .then(hasDeleted => {
-        if (hasDeleted) {
           res.redirect('/events')
-        } else {
-          res.redirect(`/events/${id}`)
-        }
       })
       .catch(err => {
         console.log(err)
