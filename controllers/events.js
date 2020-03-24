@@ -1,8 +1,8 @@
-const { event } = require('../models')
+const { Event } = require('../models')
 
 module.exports = {
   index: (req, res) => {
-    event.fetchAll()
+    Event.fetchAll()
       .then(events => {
         events = events.toJSON()
         res.render('events/index', { events })
@@ -11,7 +11,7 @@ module.exports = {
   },
   create: (req, res) => {
     const { title, description } = req.body
-    event.forge({ title, description }).save()
+    Event.forge({ title, description }).save()
       .then(event => {
         res.redirect(`/events/${event.id}`)
       })
@@ -22,7 +22,7 @@ module.exports = {
   show: (req, res) => {
     let { id } = req.params
     id = parseInt(id)
-    new event ({ id }).fetch()
+    new Event ({ id }).fetch()
       .then(event => {
         event = event.toJSON()
           res.render('events/show', { event })
@@ -31,7 +31,7 @@ module.exports = {
   },
   delete: (req, res) => {
     const { id } = req.params
-    new event({ id }).destroy()
+    new Event({ id }).destroy()
       .then(hasDeleted => {
           res.redirect('/events')
       })
@@ -41,7 +41,7 @@ module.exports = {
   },
   edit: (req, res) => {
     const { id } = req.params
-    new event({ id }).fetch()
+    new Event({ id }).fetch()
       .then(event => {
         event = event.toJSON()
           res.render('events/edit', { event })
@@ -50,7 +50,7 @@ module.exports = {
   update: (req,res) => {
     const { id } = req.params
     const { title, description } = req.body
-    new event({ id}).save({ title, description })
+    new Event({ id}).save({ title, description })
       .then(event => {
           res.redirect(`/events/${event.id}`)
       })
