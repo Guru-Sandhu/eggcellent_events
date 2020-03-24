@@ -7,10 +7,11 @@ module.exports = {
         events = events.toJSON()
         res.render('events/index', { events })
       })
+      .catch(err => console.log(err))
   },
   create: (req, res) => {
     const { title, description } = req.body
-    event.create({ title, description })
+    event.forge({ title, description }).save()
       .then(event => {
         res.redirect(`/events/${event.id}`)
       })
@@ -19,11 +20,14 @@ module.exports = {
     res.render('events/new')
   },
   show: (req, res) => {
-    const { id } = req.params
-    event.one(parseInt(id))
+    let { id } = req.params
+    id = parseInt(id)
+    new event ({ id }).fetch()
       .then(event => {
+        event = event.toJSON()
           res.render('events/show', { event })
       })
+      .catch(err => console.log(err))
   },
   delete: (req, res) => {
     const { id } = req.params
