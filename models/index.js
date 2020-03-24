@@ -1,5 +1,5 @@
-const event = require('./events')
+const Event = require('./event')
 
 module.exports = {
-  event
+  Event
 }
