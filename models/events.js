@@ -20,7 +20,7 @@ module.exports = {
       .returning('*')
       .then(newEvents => {
         if (newEvents.length > 0) {
-          return newEvent
+          return newEvent[0]
         }
       })
   },
