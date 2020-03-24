@@ -2,8 +2,9 @@ const { event } = require('../models')
 
 module.exports = {
   index: (req, res) => {
-    event.all()
+    event.fetchAll()
       .then(events => {
+        events = events.toJSON()
         res.render('events/index', { events })
       })
   },

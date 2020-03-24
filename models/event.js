@@ -1,6 +1,6 @@
 const bookshelf = require('../db/orm')
 
-const Event = bookshelf.Model('Event', {
+const Event = bookshelf.model('Event', {
   tableName: 'events'
 })
 
