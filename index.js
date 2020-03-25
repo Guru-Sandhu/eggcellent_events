@@ -1,6 +1,7 @@
 const express = require('express')
 const logger = require('morgan')
 const methodOverride = require('method-override')
+const cookieSession = require('cookie-session')
 const eventsRouter = require('./routes/events')
 const usersRouter = require('./routes/users')
 const rootsRouter = require('./routes/roots')
@@ -14,12 +15,19 @@ app.set('views', 'views')
 app.use(logger('dev'))
 app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }))
+app.use(cookieSession({
+  name: 'session',
+  secret: 'supersecret',
+  maxAge: 24 * 60 * 60 * 1000
+}))
+
 app.use(methodOverride((req, res) => {
   if (req.body && req.body._method) {
     const method = req.body._method
     return method
   }
 }))
+
 app.use(noMonkey)
 
 app.use('/events', eventsRouter)
