@@ -1,0 +1,13 @@
+<%- include('../partials/header') %>
+  <h1>User Show Page</h1>
+  <div class="shadow p-3 mb-5 bg-white rounded">
+    <h3><%= user.id %>: <%= user.first_name %> <%= user.last_name %></h3></br>
+    <p>Email: <%= user.email %></p>
+    <hr>
+    <form action="/users/<%= user.id %>" method="POST" style="display: inline;">
+      <input type="hidden" name="_method" value="DELETE">
+      <input class="btn btn-danger" type="submit" value="Delete">
+    </form>
+    <a href="/users/<%= user.id %>/edit" class="btn btn-info">Edit</a>
+  </div>
+<%- include('../partials/footer') %>
