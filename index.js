@@ -2,6 +2,7 @@ const express = require('express')
 const logger = require('morgan')
 const methodOverride = require('method-override')
 const eventsRouter = require('./routes/events')
+const usersRouter = require('./routes/users')
 const noMonkey = require('./middleware/noMonkey')
 
 const app = express()
@@ -21,6 +22,8 @@ app.use(methodOverride((req, res) => {
 app.use(noMonkey)
 
 app.use('/events', eventsRouter)
+
+app.use('/users', usersRouter)
 
 app.get('/', (req, res) => {
   res.render('hello_world.ejs')
