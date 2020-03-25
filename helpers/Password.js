@@ -8,4 +8,15 @@ module.exports = class Password {
         return hash
       })
   }
+
+  static compare (password, hash) {
+    return new Promise((resolve, reject) => {
+      bcrypt.compare(password, hash, (err, same) => {
+        if (err) {
+          reject(err)
+        }
+        resolve(same)
+      })
+    })
+  }
 }
