@@ -12,19 +12,19 @@ module.exports = {
         user = u.toJSON()
         return Password.compare(password, user.password_digest)
       })
-        .then(result => {
-          if (result) {
-            console.log()
-            req.session.id = user.id
-            res.redirect('/')
-          } else {
-            res.send('Wrong credentials')
-          }
-        })
-        .catch(err => {
-          console.log(err)
+      .then(result => {
+        if (result) {
+          console.log()
+          req.session.id = user.id
+          res.redirect('/')
+        } else {
+          res.send('Wrong credentials')
+        }
+      })
+      .catch(err => {
+        console.log(err)
         console.log('Bookshelf throws CustomError: EmptyResponse when .fetch() does not retrieve a record')
         res.send('Wrong credentials')
-        })
+      })
   }
 }

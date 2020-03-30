@@ -22,10 +22,10 @@ module.exports = {
   show: (req, res) => {
     let { id } = req.params
     id = parseInt(id)
-    new Event ({ id }).fetch()
+    new Event({ id }).fetch()
       .then(event => {
         event = event.toJSON()
-          res.render('events/show', { event })
+        res.render('events/show', { event })
       })
       .catch(err => console.log(err))
   },
@@ -33,7 +33,7 @@ module.exports = {
     const { id } = req.params
     new Event({ id }).destroy()
       .then(hasDeleted => {
-          res.redirect('/events')
+        res.redirect('/events')
       })
       .catch(err => {
         console.log(err)
@@ -44,15 +44,15 @@ module.exports = {
     new Event({ id }).fetch()
       .then(event => {
         event = event.toJSON()
-          res.render('events/edit', { event })
+        res.render('events/edit', { event })
       })
   },
-  update: (req,res) => {
+  update: (req, res) => {
     const { id } = req.params
     const { title, description } = req.body
-    new Event({ id}).save({ title, description })
+    new Event({ id }).save({ title, description })
       .then(event => {
-          res.redirect(`/events/${event.id}`)
+        res.redirect(`/events/${event.id}`)
       })
       .catch(err => console.log(err))
   }

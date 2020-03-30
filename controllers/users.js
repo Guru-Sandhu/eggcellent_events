@@ -22,10 +22,10 @@ module.exports = {
   show: (req, res) => {
     let { id } = req.params
     id = parseInt(id)
-    new User ({ id }).fetch()
+    new User({ id }).fetch()
       .then(user => {
         user = user.toJSON()
-          res.render('users/show', { user })
+        res.render('users/show', { user })
       })
       .catch(err => console.log(err))
   },
@@ -33,7 +33,7 @@ module.exports = {
     const { id } = req.params
     new User({ id }).destroy()
       .then(hasDeleted => {
-          res.redirect('/users')
+        res.redirect('/users')
       })
       .catch(err => {
         console.log(err)
@@ -44,15 +44,15 @@ module.exports = {
     new User({ id }).fetch()
       .then(user => {
         user = user.toJSON()
-          res.render('users/edit', { user })
+        res.render('users/edit', { user })
       })
   },
-  update: (req,res) => {
+  update: (req, res) => {
     const { id } = req.params
     const { first_name, lastName, email, password } = req.body
-    new User({ id}).save({ first_name: firstName, last_name: lastName, email, password_digest: password })
+    new User({ id }).save({ first_name: firstName, last_name: lastName, email, password_digest: password })
       .then(user => {
-          res.redirect(`/users/${user.id}`)
+        res.redirect(`/users/${user.id}`)
       })
       .catch(err => console.log(err))
   }

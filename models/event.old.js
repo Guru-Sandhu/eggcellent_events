@@ -26,15 +26,15 @@ module.exports = {
   },
   delete: (id) => {
     return knex.delete().from('events').where({ id: id })
-      .then (amountOfRecordsDeleted => {
+      .then(amountOfRecordsDeleted => {
         if (amountOfRecordsDeleted > 0) {
           return true
         }
       })
   },
-  update: ({ id , title, description}) => {
-    return knex('events').update({ title, description}).where({ id }).returning('*')
-      .then( updatedEvents => {
+  update: ({ id, title, description }) => {
+    return knex('events').update({ title, description }).where({ id }).returning('*')
+      .then(updatedEvents => {
         if (updatedEvents.length > 0) {
           return updatedEvents[0]
         }
