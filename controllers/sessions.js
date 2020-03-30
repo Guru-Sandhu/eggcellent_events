@@ -3,7 +3,7 @@ const Password = require('../helpers/Password')
 
 module.exports = {
   new: (req, res) => {
-    res.render('sessions/new')
+    res.render('sessions/new', { session: req.session})
   },
   create: (req, res) => {
     const { email, password } = req.body
@@ -26,5 +26,9 @@ module.exports = {
         console.log('Bookshelf throws CustomError: EmptyResponse when .fetch() does not retrieve a record')
         res.send('Wrong credentials')
       })
+  },
+  delete: (req, res) => {
+    req.session = null
+    res.send('logged out')
   }
 }

@@ -10,4 +10,6 @@ router.get('/login', SessionsController.new)
 // POST "/login"
 router.post('/login', SessionsController.create)
 
+router.delete('/session', SessionsController.delete)
+
 module.exports = router
