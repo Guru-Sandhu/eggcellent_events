@@ -1,19 +1,20 @@
 const express = require('express')
 const router = express.Router()
 const { events } = require('../controllers')
+const authenticateUser = require('../middleware/authenticateUser')
 
 router.get('/', events.index)
 
-router.get('/new', events.new)
+router.get('/new', authenticateUser, events.new)
 
 router.get('/:id', events.show)
 
-router.get('/:id/edit', events.edit)
+router.get('/:id/edit', authenticateUser, events.edit)
 
-router.patch('/:id', events.update)
+router.patch('/:id', authenticateUser, events.update)
 
-router.post('/', events.create)
+router.post('/', authenticateUser, events.create)
 
-router.delete('/:id', events.delete)
+router.delete('/:id', authenticateUser, events.delete)
 
 module.exports = router

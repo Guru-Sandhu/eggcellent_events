@@ -15,7 +15,7 @@ module.exports = {
       .then(result => {
         if (result) {
           console.log()
-          req.session.id = user.id
+          req.session.user = user
           res.redirect('/')
         } else {
           res.send('Wrong credentials')

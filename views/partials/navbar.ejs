@@ -21,15 +21,13 @@
     </ul>
     <ul class="navbar-nav">
       <li class="nav-item">
-        <% if (locals.session) { %>
-          <% if (locals.session.id) { %> 
-            <form action="/session" method="POST">
-              <input type="hidden" name="_method" value="DELETE">
-              <input type="submit" value="Log Out">
-            </form>
-          <% } else { %>
-            <a class="nav-link" href="/login" tabindex="-1">Log In</a>
-          <% } %>
+        <% if (user.id) { %> 
+          <form action="/session" method="POST">
+            <input type="hidden" name="_method" value="DELETE">
+            <input class="btn btn-danger" type="submit" value="Log Out">
+          </form>
+        <% } else { %>
+          <a class="nav-link" href="/login" tabindex="-1">Log In</a>
         <% } %>
       </li>
     </ul>
