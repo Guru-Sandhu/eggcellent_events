@@ -1,5 +1,5 @@
 const { User } = require('../models')
-
+const Password = require('../helpers/Password')
 module.exports = {
   index: (req, res) => {
     User.fetchAll()
@@ -10,11 +10,18 @@ module.exports = {
       .catch(err => console.log(err))
   },
   create: (req, res) => {
-    const { firstName, lastName, email, password } = req.body
-    User.forge({ first_name: firstName, last_name: lastName, email, password_digest: password }).save()
-      .then(user => {
-        res.redirect(`/users/${user.id}`)
-      })
+    const { firstName, lastName, email, password, passwordConfirmation } = req.body
+    if (password === passwordConfirmation) {
+      Password.create(password)
+        .then(hash => {
+          new User({ first_name: firstName, last_name: lastName, email, password_digest: hash }).save()
+        })
+        .then(user => {
+          res.send(user)
+        })
+    } else {
+      res.send('paswords do not match')
+    }
   },
   new: (req, res) => {
     res.render('users/new')

@@ -12,7 +12,7 @@ router.get('/:id/edit', users.edit)
 
 router.patch('/:id', users.update)
 
-router.post('/new', users.create)
+router.post('/', users.create)
 
 router.delete('/:id', users.delete)
 
