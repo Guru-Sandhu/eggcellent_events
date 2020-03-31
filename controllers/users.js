@@ -11,20 +11,11 @@ module.exports = {
   },
   create: (req, res, next) => {
     const { firstName, lastName, email, password, passwordConfirmation } = req.body
-    if (password === passwordConfirmation) {
-      Password.create(password)
-        .then(hash => {
-          new User({ first_name: firstName, last_name: lastName, email, password_digest: hash }).save()
-        })
-        .then(user => {
-          res.send(user)
-        })
-        .catch(err => {
-          next(err)
-        })
-    } else {
-      res.send('paswords do not match')
-    }
+    new User({ first_name: firstName, last_name: lastName, email, password_digest: password, passwordConfirmation }).save()
+      .then(user => {
+        user = user.toJSON()
+        res.redirect(`/users/${user.id}`)
+    })
   },
   new: (req, res) => {
     res.render('users/new')
