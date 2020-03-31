@@ -24,11 +24,11 @@ module.exports = {
       .catch(err => {
         console.log(err)
         console.log('Bookshelf throws CustomError: EmptyResponse when .fetch() does not retrieve a record')
-        res.send('Wrong credentials')
       })
   },
   delete: (req, res) => {
     req.session = null
+    res.redirect('/')
     res.send('logged out')
   }
 }

@@ -9,7 +9,7 @@ module.exports = {
       })
       .catch(err => console.log(err))
   },
-  create: (req, res) => {
+  create: (req, res, next) => {
     const { firstName, lastName, email, password, passwordConfirmation } = req.body
     if (password === passwordConfirmation) {
       Password.create(password)
@@ -18,6 +18,9 @@ module.exports = {
         })
         .then(user => {
           res.send(user)
+        })
+        .catch(err => {
+          next(err)
         })
     } else {
       res.send('paswords do not match')
