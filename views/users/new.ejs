@@ -1,5 +1,10 @@
 <%- include("../partials/header") %>
 <h1>Users New Page</h1>
+<% if (locals.errors) { %>
+  <% for (let error of errors) { %>
+    <div><%= error %></div>
+  <% } %>
+<% } %>
 <form action="/users" method="POST">
   <%- include("_userFormInputs") %>
 </form>

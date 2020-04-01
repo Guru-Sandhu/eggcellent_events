@@ -15,7 +15,16 @@ module.exports = {
       .then(user => {
         user = user.toJSON()
         res.redirect(`/users/${user.id}`)
-    })
+      })
+      .catch(err => {
+        let errors = []
+        if (!err.length) {
+          errors = err.map(e => e.message)
+        } else {
+          errors = [err.message]
+        }
+        res.render('users/new', { errors })
+      })
   },
   new: (req, res) => {
     res.render('users/new')
