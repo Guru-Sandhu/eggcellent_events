@@ -2,22 +2,47 @@
   <div class="form-group">
     <label for="first_name">First Name</label>
     <input type="text" name="firstName" class="form-control" value="<%= locals.user ? user.first_name : '' %>">
+    <% if (locals.errors) { %> 
+      <% if (locals.errors.first_name) { %>
+        <p><%= locals.errors.first_name.message %></p>
+      <% } %>
+    <% } %>
   </div>
   <div class="form-group">
     <label for="last_name">Last Name</label>
     <input type="text" name="lastName" class="form-control" value="<%= locals.user ? user.last_name : '' %>">
+    <% if (locals.errors) { %> 
+      <% if (locals.errors.last_name) { %>
+        <p><%= locals.errors.last_name.message %></p>
+      <% } %>
+    <% } %>
   </div>
   <div class="form-group">
     <label for="email">Email</label>
     <input type="email" name="email" class="form-control" value="<%= locals.user ? user.email : '' %>">
+    <% if (locals.errors) { %> 
+      <% if (locals.errors.email) { %>
+        <p><%= locals.errors.email.message %></p>
+      <% } %>
+    <% } %>
   </div>
   <div class="form-group">
     <label for="password">Password</label>
     <input type="password" name="password" class="form-control" value="<%= locals.user ? user.password : '' %>">
+    <% if (locals.errors) { %> 
+      <% if (locals.errors.password) { %>
+        <p><%= locals.errors.password.message %></p>
+      <% } %>
+    <% } %>
   </div>
   <div class="form-group">
     <label for="passwordConfirmation">Password Confirmation</label>
     <input type="password" name="passwordConfirmation" class="form-control" value="<%= locals.user ? user.password : '' %>">
+    <% if (locals.errors) { %> 
+      <% if (locals.errors.passwordConfirmation) { %>
+        <p><%= locals.errors.passwordConfirmation.message %></p>
+      <% } %>
+    <% } %>
   </div>
   <input type="submit" class="btn btn-primary">
 </div>

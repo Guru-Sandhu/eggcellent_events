@@ -17,13 +17,8 @@ module.exports = {
         res.redirect(`/users/${user.id}`)
       })
       .catch(err => {
-        let errors = []
-        if (!err.length) {
-          errors = err.map(e => e.message)
-        } else {
-          errors = [err.message]
-        }
-        res.render('users/new', { errors })
+        console.log(err.errors)
+        res.render('users/new', { errors: err.errors })
       })
   },
   new: (req, res) => {
@@ -59,11 +54,13 @@ module.exports = {
   },
   update: (req, res) => {
     const { id } = req.params
-    const { first_name, lastName, email, password } = req.body
+    const { firstName, lastName, email, password } = req.body
     new User({ id }).save({ first_name: firstName, last_name: lastName, email, password_digest: password })
       .then(user => {
         res.redirect(`/users/${user.id}`)
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        res.send(err)
+      })
   }
 }

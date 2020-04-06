@@ -1,11 +1,27 @@
 const bookshelf = require('../db/orm')
 const Password = require('../helpers/Password')
+const Checkit = require('checkit')
+
+const rules = {
+  first_name: 'required',
+  last_name: 'required',
+  email: ['required', 'email'],
+  password: ['required', 'minLength:8'],
+  passwordConfirmation: [
+    { rule: 'required', message: 'Bananas'},
+    { rule: function (val, params, context) {
+      if  (val !== this.target.password) {
+        throw new Error('Passwords do not Match')
+      }
+  }, message: 'Passwords do not match'}
+]
+}
 
 const User = bookshelf.model('User', {
   tableName: 'users',
   initialize () {
+    this.on('saving', this.validateSave)
     this.on('saving', (model, attrs, options) => {
-      this.validate()
       attrs.email = this.attributes.email.toLowerCase()
       return Password.create(attrs.password_digest)
         .then(hash => {
@@ -15,21 +31,8 @@ const User = bookshelf.model('User', {
         })
     })
   },
-  validate () {
-    const errors = []
-    if (!this.attributes.first_name) {
-      errors.push(new Error('Must provide First Name'))
-    }
-    if (!this.attributes.last_name) {
-      errors.push(new Error('Must provide Last Name'))
-    }
-    if (this.attributes.password_digest !== this.attributes.passwordConfirmation) {
-      errors.push(new Error('passwords do not match'))
-    }
-    if (errors.length) {
-      throw errors
-    }
-    return this
+  validateSave() {
+    return new Checkit(rules).run(this.attributes)
   }
 })
 
