@@ -27,7 +27,7 @@ module.exports = {
   show: (req, res) => {
     let { id } = req.params
     id = parseInt(id)
-    new User({ id }).fetch()
+    new User({ id }).fetch({ withRelated: 'events' })
       .then(user => {
         user = user.toJSON()
         res.render('users/show', { user })

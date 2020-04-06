@@ -10,8 +10,9 @@ module.exports = {
       .catch(err => console.log(err))
   },
   create: (req, res) => {
+    const user = res.locals.user
     const { title, description } = req.body
-    Event.forge({ title, description }).save()
+    Event.forge({ title, description, user_id: user.id }).save()
       .then(event => {
         res.redirect(`/events/${event.id}`)
       })
@@ -22,7 +23,7 @@ module.exports = {
   show: (req, res) => {
     let { id } = req.params
     id = parseInt(id)
-    new Event({ id }).fetch()
+    new Event({ id }).fetch({ withRelated: 'owner' })
       .then(event => {
         event = event.toJSON()
         res.render('events/show', { event })

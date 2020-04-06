@@ -31,7 +31,10 @@ const User = bookshelf.model('User', {
         })
     })
   },
-  validateSave() {
+  events () {
+    return this.hasMany('Event')
+  },
+  validateSave () {
     return new Checkit(rules).run(this.attributes)
   }
 })

@@ -10,4 +10,10 @@
     </form>
     <a href="/users/<%= user.id %>/edit" class="btn btn-info">Edit</a>
   </div>
+  <% for (let event of user.events) { %>
+    <div class="shadow p-3 mb-5 bg-white rounded">
+      <h4><%= event.title %></h4>
+      <p><%= event.description %></p>
+    </div>
+  <% } %>
 <%- include('../partials/footer') %>
