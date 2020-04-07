@@ -14,7 +14,10 @@
 </head>
 <body>
   <%- include('./navbar.ejs') %>
-  <% if (sessionFlash.confirm) { %>
-    <p><%= sessionFlash.confirm %></p>
-  <% } %>
   <div class="container">
+    <% if (sessionFlash.confirm) { %>
+      <p><%= sessionFlash.confirm %></p>
+    <% } %>
+    <% if (sessionFlash.error) { %>
+      <p class="alert alert-danger" role="alert"><%= sessionFlash.error %></p>
+    <% } %>

@@ -48,13 +48,28 @@ module.exports = {
         res.render('events/edit', { event })
       })
   },
-  update: (req, res) => {
+  update: (req, res, next) => {
+    const user = res.locals.user
     const { id } = req.params
     const { title, description } = req.body
-    new Event({ id }).save({ title, description })
+    let event
+    new Event({ id }).fetch()
+    .then(result => {
+      event = result
+      if (event.attributes.user_id === user.id) {
+        return event.save({ title, description })
+      } else {
+        req.session.sessionFlash.error = 'You are not allowed to do this action'
+        res.redirect(`/events/${event.id}`)
+      }
+    })
       .then(event => {
+        event = event.toJSON()
         res.redirect(`/events/${event.id}`)
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        console.log(err)
+        next(err)
+      })
   }
 }
