@@ -30,14 +30,25 @@ module.exports = {
       })
       .catch(err => console.log(err))
   },
-  delete: (req, res) => {
+  delete: (req, res, next) => {
+    const user = res.locals.user
     const { id } = req.params
-    new Event({ id }).destroy()
-      .then(hasDeleted => {
+    let event
+    new Event({ id }).fetch()
+      .then(result => {
+        event = result
+        if (event.attributes.user_id === user.id) {
+          return event.destroy()
+        }
+        req.session.sessionFlash.error = 'You are not allowed to do this action'
+        res.redirect(`/events/${event.id}`)
+      })
+      .then(() => {
         res.redirect('/events')
       })
       .catch(err => {
         console.log(err)
+        next(err)
       })
   },
   edit: (req, res) => {
@@ -54,15 +65,15 @@ module.exports = {
     const { title, description } = req.body
     let event
     new Event({ id }).fetch()
-    .then(result => {
-      event = result
-      if (event.attributes.user_id === user.id) {
-        return event.save({ title, description })
-      } else {
-        req.session.sessionFlash.error = 'You are not allowed to do this action'
-        res.redirect(`/events/${event.id}`)
-      }
-    })
+      .then(result => {
+        event = result
+        if (event.attributes.user_id === user.id) {
+          return event.save({ title, description })
+        } else {
+          req.session.sessionFlash.error = 'You are not allowed to do this action'
+          res.redirect(`/events/${event.id}`)
+        }
+      })
       .then(event => {
         event = event.toJSON()
         res.redirect(`/events/${event.id}`)
