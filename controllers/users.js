@@ -14,11 +14,13 @@ module.exports = {
     new User({ first_name: firstName, last_name: lastName, email, password_digest: password, passwordConfirmation }).save()
       .then(user => {
         user = user.toJSON()
+        req.session.sessionFlash.confirm = 'User Created!'
         res.redirect(`/users/${user.id}`)
       })
       .catch(err => {
-        console.log(err.errors)
-        res.render('users/new', { errors: err.errors })
+        req.locals.sessionFlash = {}
+        req.locals.sessionFlash.errors = err
+        res.redirect('users/new')
       })
   },
   new: (req, res) => {

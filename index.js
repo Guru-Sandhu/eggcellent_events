@@ -7,6 +7,7 @@ const usersRouter = require('./routes/users')
 const rootsRouter = require('./routes/roots')
 const noMonkey = require('./middleware/noMonkey')
 const setSessionUser = require('./middleware/setSessionUser')
+const sessionFlash = require('./middleware/sessionFlash')
 
 const app = express()
 
@@ -30,6 +31,7 @@ app.use(methodOverride((req, res) => {
 }))
 
 app.use(setSessionUser)
+app.use(sessionFlash)
 app.use(noMonkey)
 
 app.use('/events', eventsRouter)
