@@ -13,8 +13,8 @@ const rules = {
       if  (val !== this.target.password_digest) {
         throw new Error('Passwords do not Match')
       }
-  }, message: 'Passwords do not match'}
-]
+    }, message: 'Passwords do not match'}
+  ]
 }
 
 const User = bookshelf.model('User', {

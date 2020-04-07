@@ -40,7 +40,7 @@ module.exports = {
   delete: (req, res) => {
     const { id } = req.params
     new User({ id }).destroy()
-      .then(hasDeleted => {
+      .then(() => {
         res.redirect('/users')
       })
       .catch(err => {
@@ -51,8 +51,13 @@ module.exports = {
     const { id } = req.params
     new User({ id }).fetch()
       .then(user => {
-        user = user.toJSON()
-        res.render('users/edit', { user })
+        if (event.attributes.user_id === user.id) {
+          event = event.toJSON()
+          res.render('events/edit', { event })
+        } else {
+          req.session.sessionFlash.error = 'You dont own this event you can not go to the edit page'
+          res.redirect(`/events/${id}`)
+        }
       })
   },
   update: (req, res) => {

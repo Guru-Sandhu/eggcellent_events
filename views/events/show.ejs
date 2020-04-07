@@ -5,10 +5,12 @@
     <p><%= event.description %> </p>
     <hr>
     <p class="float-right">Last Updated at <%= event.updated_at %> By <%= event.owner ? event.owner.first_name : "" %> </p>
-    <form action="/events/<%= event.id %>" method="POST" style="display: inline;">
-      <input type="hidden" name="_method" value="DELETE">
-      <input class="btn btn-danger" type="submit" value="DELETE">
-    </form>
-    <a href="/events/<%= event.id %>/edit" class="btn btn-info">Edit</a>
+    <% if (user.id === event.owner.id) { %> 
+      <form action="/events/<%= event.id %>" method="POST" style="display: inline;">
+        <input type="hidden" name="_method" value="DELETE">
+        <input class="btn btn-danger" type="submit" value="DELETE">
+      </form>
+      <a href="/events/<%= event.id %>/edit" class="btn btn-info">Edit</a>
+    <% } %>
   </div>
 <%-  include('../partials/footer') %>
