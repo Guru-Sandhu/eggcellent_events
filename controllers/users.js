@@ -11,15 +11,16 @@ module.exports = {
   },
   create: (req, res, next) => {
     const { firstName, lastName, email, password, passwordConfirmation } = req.body
-    new User({ first_name: firstName, last_name: lastName, email, password_digest: password, passwordConfirmation }).save()
+    new User({ first_name: firstName, last_name: lastName, email, password_digest: password, passwordConfirmation: passwordConfirmation }).save()
       .then(user => {
         user = user.toJSON()
         req.session.sessionFlash.confirm = 'User Created!'
         res.redirect(`/users/${user.id}`)
       })
       .catch(err => {
-        req.locals.sessionFlash = {}
-        req.locals.sessionFlash.errors = err
+        console.log(err)
+        req.session.sessionFlash = {}
+        req.session.sessionFlash.errors = err
         res.redirect('users/new')
       })
   },

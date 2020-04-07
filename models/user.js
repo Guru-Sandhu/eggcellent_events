@@ -6,11 +6,11 @@ const rules = {
   first_name: 'required',
   last_name: 'required',
   email: ['required', 'email'],
-  password: ['required', 'minLength:8'],
+  password_digest: ['required', 'minLength:8'],
   passwordConfirmation: [
     { rule: 'required', message: 'Bananas'},
     { rule: function (val, params, context) {
-      if  (val !== this.target.password) {
+      if  (val !== this.target.password_digest) {
         throw new Error('Passwords do not Match')
       }
   }, message: 'Passwords do not match'}

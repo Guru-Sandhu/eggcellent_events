@@ -1,37 +1,37 @@
 <div class="shadow-sm p-3 mb-5 bg-white rounded">
   <div class="form-group">
     <label for="first_name">First Name</label>
-    <input type="text" name="firstName" class="form-control" value="<%= locals.user ? user.first_name : '' %>">
+    <input type="text" name="firstName" class="form-control" value="<%= sessionFlash.user ? user.first_name : '' %>">
       <% if (sessionFlash.errors && sessionFlash.errors.first_name) { %>
-        <p><%= locals.errors.first_name %></p>
+        <p><%= sessionFlash.errors.first_name %></p>
       <% } %>
   </div>
   <div class="form-group">
     <label for="last_name">Last Name</label>
-    <input type="text" name="lastName" class="form-control" value="<%= locals.user ? user.last_name : '' %>">
+    <input type="text" name="lastName" class="form-control" value="<%= sessionFlash.user ? user.last_name : '' %>">
       <% if (sessionFlash.errors && sessionFlash.errors.last_name) { %>
-        <p><%= locals.errors.last_name %></p>
+        <p><%= sessionFlash.errors.last_name %></p>
       <% } %>
   </div>
   <div class="form-group">
     <label for="email">Email</label>
-    <input type="email" name="email" class="form-control" value="<%= locals.user ? user.email : '' %>">
+    <input type="email" name="email" class="form-control" value="<%= sessionFlash.user ? user.email : '' %>">
       <% if (sessionFlash.errors && sessionFlash.errors.email) { %>
-        <p><%= locals.errors.email %></p>
+        <p><%= sessionFlash.errors.email %></p>
       <% } %>
   </div>
   <div class="form-group">
     <label for="password">Password</label>
-    <input type="password" name="password" class="form-control" value="<%= locals.user ? user.password : '' %>">
+    <input type="password" name="password" class="form-control" value="<%= sessionFlash.user ? user.password : '' %>">
       <% if (sessionFlash.errors && sessionFlash.errors.password) { %>
-        <p><%= locals.errors.password %></p>
+        <p><%= sessionFlash.errors.password %></p>
       <% } %>
   </div>
   <div class="form-group">
     <label for="passwordConfirmation">Password Confirmation</label>
-    <input type="password" name="passwordConfirmation" class="form-control" value="<%= locals.user ? user.password : '' %>">
+    <input type="password" name="passwordConfirmation" class="form-control" value="<%= sessionFlash.user ? user.password : '' %>">
       <% if (sessionFlash.errors && sessionFlash.errors.passwordConfirmation) { %>
-        <p><%= locals.errors.passwordConfirmation %></p>
+        <p><%= sessionFlash.errors.passwordConfirmation %></p>
       <% } %>
   </div>
   <input type="submit" class="btn btn-primary">
